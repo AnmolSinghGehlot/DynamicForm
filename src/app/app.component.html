@@ -1,0 +1,51 @@
+<form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+  <label>
+    Source:
+    <input type="text" formControlName="source">
+  </label>
+
+  <label>
+    Destination:
+    <input type="text" formControlName="destination">
+  </label>
+
+  <label>
+    Date:
+    <input type="date" formControlName="date">
+  </label>
+
+  <label for="coach" formControlName="coach">Choose type of Coach:</label>
+  <select id="coach" name="coach">
+    <option value="Non-AC-Sitting">Non-AC Sitting Coach</option>
+    <option value="AC-Sitting">AC Sitting Coach</option>
+    <option value="Non-AC-Sleeping">Non-AC Sleeping Coach</option>
+    <option value="AC-Sleeping">AC Sleeping Coach</option>
+  </select>
+
+  <div formArrayName="passengers">
+    <h3>Enter Passenger Details</h3>
+    <button (click)="addNewPassengers()">Add New Passenger</button>
+    <div *ngFor="let pass of passengers.controls;let i=index">
+      <h2>Passenger {{i+1}}</h2>
+      <label>
+        Passenger Name:
+        <input type="text" formControlName="name" [formControlName]="i">
+      </label>
+      <label>
+        Passenger Age:
+        <input type="number" formControlName="age" [formControlName]="i">
+      </label>
+      <label>
+        Gender:
+        <input type="text" formControlName="gender" [formControlName]="i">
+      </label>
+      <label>
+        Physical Disabled:
+        <input type="text" formControlName="ph" [formControlName]="i">
+      </label>
+
+    </div>
+  </div>
+  <button type="submit" [disabled]="!bookingForm.valid">Submit</button>
+
+</form>
